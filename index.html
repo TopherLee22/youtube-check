@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Embed</title>
+</head>
+<body>
+
+    <p2>
+        <form onsubmit="return handleYoutubeSubmit(event)" class="right">
+            <label for="lname">Youtube link:</label>
+            <input type="text" id="lname" name="lname"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </p2>
+
+    <div class="leftAlign">
+        <p>Playlists:</p>
+    </div>
+
+    <div class="center-wrap">
+        <iframe width="420" height="315" class="center" src="https://www.youtube.com/embed/jNQXAC9IVRw"></iframe>
+    </div>
+
+    <script type="module">
+        import init, { extract_video_id } from './pkg/youtube_check.js';
+
+        let wasmReady = false;
+
+        async function run() {
+            await init();
+            wasmReady = true;
+        }
+        run();
+
+        window.handleYoutubeSubmit = function (e) {
+            e.preventDefault();
+
+            if (!wasmReady) {
+                alert('Still loading, try again in a second');
+                return false;
+            }
+
+            const url = document.getElementById('lname').value.trim();
+            const videoId = extract_video_id(url);
+            const container = document.querySelector('.center-wrap');
+
+            if (!videoId) {
+                container.innerHTML = '<p style="color:red;">Invalid YouTube URL</p>';
+                return false;
+            }
+
+            container.innerHTML = `<iframe width="420" height="315" class="center" src="https://www.youtube.com/embed/${videoId}" </iframe>`;
+            return false;
+        };
+    </script>
+
+</body>
+</html>
