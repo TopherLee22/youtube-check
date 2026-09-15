@@ -1,0 +1,31 @@
+Html
+
+New textbox
+New submit button
+New youtube embed frame
+
+
+Javascript
+
+Prevent original function where pressing submit button takes you to a new website
+
+On button press call checkLink(inserted link here)
+
+If link is valid, embed the youtube link into the frame
+
+Rust/WASM
+
+
+checkLink string function (string input)
+
+	If input == youtubeLink
+
+		Id = substring(find where youtube id starts, + length of youtube id)
+		return(Id);
+	Else
+		Return (“not a youtube link”)
+			
+
+
+
+
