@@ -19,6 +19,16 @@ pub fn extract_video_id(input: &str) -> String {
 
     String::new()
 
+/*
 
+checkLink string function (string input)
+
+	If input == youtubeLink
+
+		Id = substring(find where youtube id starts, + length of youtube id)
+		return(Id);
+	Else
+		return nothing.
+*/
 
 }
