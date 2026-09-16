@@ -18,17 +18,14 @@ pub fn extract_video_id(input: &str) -> String {
     }
 
     String::new()
-
-/*
-
-checkLink string function (string input)
-
-	If input == youtubeLink
-
-		Id = substring(find where youtube id starts, + length of youtube id)
-		return(Id);
-	Else
-		return nothing.
-*/
-
 }
+
+#[wasm_bindgen]
+pub fn extract_spotify_id(input: &str) -> String {
+	if let Some(idx) = input.find("track/") {
+        return input.substring(idx + 6, idx+22)
+            .split('&').next().unwrap_or("").to_string();
+    }
+    String::new()
+}
+
