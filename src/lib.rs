@@ -24,7 +24,6 @@ pub fn extract_video_id(input: &str) -> String {
 pub fn extract_spotify_id(input: &str) -> String {
 	if let Some(idx) = input.find("track/") {
         return input.substring(idx + 6, idx+22)
-            .split('&').next().unwrap_or("").to_string();
     }
     String::new()
 }
