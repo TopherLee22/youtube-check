@@ -6,6 +6,9 @@
 .leftAlign{
   text-align: left;
 }
+.center{
+  margin: 0 auto;
+}
 
 .rightAlign{
   text-align: right;
@@ -13,8 +16,4 @@
 .center-wrap {
   text-align: center;
   clear: both;
-}
-
-.center{
-  margin: 0 auto;
 }
