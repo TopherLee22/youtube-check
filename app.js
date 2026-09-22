@@ -12,8 +12,6 @@ const songUrl = $("song-url");
 const songList = $("song-list");
 const playerContainer = $("player-container");
 
-// The page remains usable even if the WASM module has not loaded yet.
-// Rust/WASM is used when available, with browser APIs as a fallback.
 function loadLocalPlaylists() {
   try {
     const raw = localStorage.getItem("mixed-music-playlists-v1");
@@ -40,7 +38,6 @@ async function initWasm() {
   try {
     wasm = await import("./pkg/mixed_music_player.js");
     await wasm.default();
-    // Migrate/use WASM storage if it contains valid data.
     const stored = wasm.load_playlists?.();
     if (stored) {
       const parsed = JSON.parse(stored);
@@ -53,7 +50,6 @@ async function initWasm() {
       }
     }
   } catch (error) {
-    // WASM is an enhancement, not a requirement for the UI to function.
     console.warn("Rust/WASM could not be loaded; using browser fallback.", error);
     wasm = null;
   }
@@ -109,7 +105,6 @@ function escapeHtml(s) {
 }
 
 function parseSongUrl(raw) {
-  // Prefer the Rust implementation when available.
   if (wasm?.parse_song_url) {
     try {
       const value = wasm.parse_song_url(raw);
@@ -164,8 +159,6 @@ function addSong() {
   render();
   setStatus("Song added to “" + playlist.name + "”.");
 
-  // Do not force autoplay here; browser autoplay policies can block it.
-  // The user can click the newly added song to start it.
   playSong(playlist.songs.length - 1);
 }
 
